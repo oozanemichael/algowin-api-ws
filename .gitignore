@@ -1,0 +1,3 @@
+# Project exclude paths
+/mh-service-core/target/
+/mh-service-netty/target/

@@ -117,6 +117,8 @@ public class NettyWebSocketClientHandler extends SimpleChannelInboundHandler<Obj
             System.out.println("WebSocket Client received closing");
             ch.close();
         }
+
+
     }
 
     //工程出现异常的时候调用

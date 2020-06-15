@@ -11,5 +11,22 @@
 
     <artifactId>mh-stream-exchange-bibox</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>org.market.hedge</groupId>
+            <artifactId>mh-stream-exchange-core</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.market.hedge</groupId>
+            <artifactId>mh-service-netty</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.knowm.xchange</groupId>
+            <artifactId>xchange-bibox</artifactId>
+            <version>4.4.2</version>
+        </dependency>
+    </dependencies>
 
 </project>

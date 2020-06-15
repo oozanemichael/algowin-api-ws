@@ -44,7 +44,7 @@ import java.net.URI;
 @Log4j2
 public final class WebSocketClient {
 
-    static final String URL = System.getProperty("url", "wss://push.bibox.com/");
+    static final String URL = System.getProperty("url", "wss://api-aws.huobi.pro/ws");
 
     public static void main(String[] args) throws Exception {
         URI uri = new URI(URL);
@@ -109,6 +109,8 @@ public final class WebSocketClient {
 
             Channel ch = b.connect(uri.getHost(), port).sync().channel();
             handler.handshakeFuture().sync();
+
+            //ch.writeAndFlush("{sub:market.btcusdt.depth.step0,id:id1}");
 
             BufferedReader console = new BufferedReader(new InputStreamReader(System.in));
             while (true) {

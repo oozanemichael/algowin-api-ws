@@ -1,10 +1,17 @@
 package org.mh.service.netty;
 
+import com.alibaba.fastjson.JSONObject;
+import io.netty.buffer.ByteBuf;
 import io.netty.channel.*;
 import io.netty.handler.codec.http.FullHttpResponse;
 import io.netty.handler.codec.http.websocketx.*;
 import io.netty.util.CharsetUtil;
 import lombok.extern.log4j.Log4j2;
+import org.mh.service.netty.util.GZIPUtils;
+
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.Objects;
 
 @Log4j2
 public class WebSocketClientHandler extends SimpleChannelInboundHandler<Object> {
@@ -12,6 +19,8 @@ public class WebSocketClientHandler extends SimpleChannelInboundHandler<Object> 
 
   public interface WebSocketMessageHandler {
     public void onMessage(String message);
+
+    public String onMessage(byte[] message);
   }
 
   protected final WebSocketClientHandshaker handshaker;
@@ -78,9 +87,26 @@ public class WebSocketClientHandler extends SimpleChannelInboundHandler<Object> 
       ch.writeAndFlush(new PongWebSocketFrame(frame.content().retain()));
     } else if (frame instanceof PongWebSocketFrame) {
       log.debug("WebSocket Client received pong");
-    } else if (frame instanceof CloseWebSocketFrame) {
+    } else if (frame instanceof BinaryWebSocketFrame) {
+      String message=dealWithBinaryFrame((BinaryWebSocketFrame)frame);
+      if (Objects.nonNull(message)){
+        ch.writeAndFlush(new TextWebSocketFrame(message));
+      }
+    }else if (frame instanceof CloseWebSocketFrame) {
       log.info("WebSocket Client received closing");
       ch.close();
+    }
+  }
+
+  private String dealWithBinaryFrame(BinaryWebSocketFrame frame) {
+    ByteBuf content = frame.content();
+    byte[] data = new byte[content.readableBytes()];
+    content.readBytes(data);
+    if (frame.isFinalFragment()) {
+      return handler.onMessage(data);
+    }else {
+      currentMessage.append(Arrays.toString(data));
+      return null;
     }
   }
 
@@ -100,6 +126,9 @@ public class WebSocketClientHandler extends SimpleChannelInboundHandler<Object> 
     }
   }
 
+  /**
+   * 异常捕获
+   * */
   @Override
   public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
     log.error(
@@ -111,4 +140,6 @@ public class WebSocketClientHandler extends SimpleChannelInboundHandler<Object> 
     }
     ctx.close();
   }
+
+
 }

@@ -1,5 +1,7 @@
 package org.mh.service.netty;
 
+import io.reactivex.functions.Function;
+import io.reactivex.internal.functions.ObjectHelper;
 import org.mh.service.core.ConnectableService;
 import org.mh.service.core.exception.NotConnectedException;
 import io.netty.bootstrap.Bootstrap;
@@ -54,6 +56,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 @Log4j2
 public abstract class NettyStreamingService<T> extends ConnectableService {
+
 
   protected static final Duration DEFAULT_CONNECTION_TIMEOUT = Duration.ofSeconds(10);
   protected static final Duration DEFAULT_RETRY_DURATION = Duration.ofSeconds(15);
@@ -183,7 +186,16 @@ public abstract class NettyStreamingService<T> extends ConnectableService {
                                         true,
                                         getCustomHeaders(),
                                         maxFramePayloadLength),
-                                this::messageHandler);
+                                new WebSocketClientHandler.WebSocketMessageHandler() {
+                                  @Override
+                                  public void onMessage(String message) {
+                                    messageHandler(message);
+                                  }
+                                  @Override
+                                  public String onMessage(byte[] message) {
+                                    return messageHandler(message);
+                                  }
+                                });
 
                 if (eventLoopGroup == null || eventLoopGroup.isShutdown()) {
                   eventLoopGroup = new NioEventLoopGroup(2);
@@ -341,6 +353,15 @@ public abstract class NettyStreamingService<T> extends ConnectableService {
    * @param message Content of the message from the server.
    */
   public abstract void messageHandler(String message);
+
+  /**
+   * Handler that receives incoming messages.
+   *
+   * @param message Content of the message from the server.
+   */
+  public abstract String messageHandler(byte[] message);
+
+
 
   public void sendMessage(String message) {
     log.debug("Sending message: {}", message);

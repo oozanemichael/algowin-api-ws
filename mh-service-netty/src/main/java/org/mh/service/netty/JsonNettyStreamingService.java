@@ -48,13 +48,19 @@ public abstract class JsonNettyStreamingService extends NettyStreamingService<Js
     }
 
     if (processArrayMassageSeparately() && jsonNode.isArray()) {
-      // In case of array - handle every message separately.
+      // 如果是数组，分别处理每条消息。
       for (JsonNode node : jsonNode) {
         handleMessage(node);
       }
     } else {
       handleMessage(jsonNode);
     }
+  }
+
+  @Override
+  public String messageHandler(byte[] message) {
+    log.debug("Received message: {}", message);
+    return null;
   }
 
   protected void sendObjectMessage(Object message) {

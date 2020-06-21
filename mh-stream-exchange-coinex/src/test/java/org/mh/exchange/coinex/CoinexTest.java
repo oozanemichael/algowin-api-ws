@@ -21,6 +21,16 @@ public class CoinexTest {
         observable.subscribe(o -> {
             log.warn(o.getAsks());
         });
+        try {
+            Thread.sleep(10000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        Observable<OrderBook> observablesss=exchange.getStreamingMarketDataService().getOrderBook(parsing.parsing(CurrencyPair.BTC_USD),1,"0");
+        observablesss.subscribe(o -> {
+            log.warn(o.getAsks());
+        });
+
 
     }
 

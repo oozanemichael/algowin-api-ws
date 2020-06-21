@@ -82,7 +82,7 @@ public abstract class NettyStreamingService<T> extends ConnectableService {
   private final Duration connectionTimeout;
   private final int idleTimeoutSeconds;
   private volatile NioEventLoopGroup eventLoopGroup;
-  protected final Map<String, Subscription> channels = new ConcurrentHashMap<>();
+  public final Map<String, Subscription> channels = new ConcurrentHashMap<>();
   private boolean compressedMessages = false;
   private final List<ObservableEmitter<Throwable>> reconnFailEmitters = new LinkedList<>();
   private final List<ObservableEmitter<Object>> connectionSuccessEmitters = new LinkedList<>();

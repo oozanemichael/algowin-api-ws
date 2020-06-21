@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.fasterxml.jackson.databind.JsonNode;
 import io.reactivex.Observable;
+import lombok.SneakyThrows;
 import org.knowm.xchange.dto.Order;
 import org.knowm.xchange.dto.marketdata.OrderBook;
 import org.knowm.xchange.dto.marketdata.Ticker;
@@ -11,6 +12,7 @@ import org.knowm.xchange.dto.marketdata.Trade;
 import org.knowm.xchange.dto.trade.LimitOrder;
 import org.mh.stream.exchange.core.ParsingCurrencyPair;
 import org.mh.stream.exchange.core.StreamingMarketDataService;
+import org.mh.stream.exchange.exception.NumberOfSubscriptionsException;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -27,8 +29,9 @@ public class CoinexStreamingMarketDataService implements StreamingMarketDataServ
     }
 
     /**
+     * 一次连接只能订阅一个
      * {
-     *   "method":"depth.query",
+     *   "method":"depth.subscribe",
      *   "params":[
      *     "BTCBCH",           #1.market: See<API invocation description·market>
      *     20,                 #2.limit: Count limit, Integer
@@ -41,8 +44,13 @@ public class CoinexStreamingMarketDataService implements StreamingMarketDataServ
      *             args[1] interval: Merge，String
      *
      * */
+    @SneakyThrows
     @Override
     public Observable<OrderBook> getOrderBook(ParsingCurrencyPair currencyPair, Object... args) {
+        if (streamingService.channels.containsKey("depth.update")){
+            throw new NumberOfSubscriptionsException(1,
+                    "Please unsubscribe of the previous currency pair first");
+        }
         JSONObject json=new JSONObject();
         json.put("method","depth.subscribe");
         JSONArray jsonArray=new JSONArray();
@@ -57,16 +65,20 @@ public class CoinexStreamingMarketDataService implements StreamingMarketDataServ
                     List<LimitOrder> listBids = new ArrayList<>();
                     List<LimitOrder> listAsks = new ArrayList<>();
                     Date date=new Date(param.get("time").asLong());
-                    param.get("bids").forEach(
-                            bids->{
-                                listBids.add(new LimitOrder(Order.OrderType.BID,new BigDecimal(bids.get(1).asText()),currencyPair.getCurrencyPair(),null,date,new BigDecimal(bids.get(0).asText())));
-                            }
-                    );
-                    param.get("asks").forEach(
-                            asks->{
-                                listAsks.add(new LimitOrder(Order.OrderType.ASK,new BigDecimal(asks.get(1).asText()),currencyPair.getCurrencyPair(),null,date,new BigDecimal(asks.get(0).asText())));
-                            }
-                    );
+                    if (param.hasNonNull("bids")) {
+                        param.get("bids").forEach(
+                                bids -> {
+                                    listBids.add(new LimitOrder(Order.OrderType.BID, new BigDecimal(bids.get(1).asText()), currencyPair.getCurrencyPair(), null, date, new BigDecimal(bids.get(0).asText())));
+                                }
+                        );
+                    }
+                    if (param.hasNonNull("asks")){
+                        param.get("asks").forEach(
+                                asks->{
+                                    listAsks.add(new LimitOrder(Order.OrderType.ASK,new BigDecimal(asks.get(1).asText()),currencyPair.getCurrencyPair(),null,date,new BigDecimal(asks.get(0).asText())));
+                                }
+                        );
+                    }
                     return new OrderBook(date,listAsks,listBids);
                 }
         );

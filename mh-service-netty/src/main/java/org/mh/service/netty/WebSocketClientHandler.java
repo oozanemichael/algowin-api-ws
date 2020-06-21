@@ -20,7 +20,7 @@ public class WebSocketClientHandler extends SimpleChannelInboundHandler<Object> 
   public interface WebSocketMessageHandler {
     public void onMessage(String message);
 
-    public String onMessage(byte[] message);
+    public void onMessage(byte[] message);
   }
 
   protected final WebSocketClientHandshaker handshaker;
@@ -88,26 +88,21 @@ public class WebSocketClientHandler extends SimpleChannelInboundHandler<Object> 
     } else if (frame instanceof PongWebSocketFrame) {
       log.debug("WebSocket Client received pong");
     } else if (frame instanceof BinaryWebSocketFrame) {
-      String message=dealWithBinaryFrame((BinaryWebSocketFrame)frame);
-      if (Objects.nonNull(message)){
-        ch.writeAndFlush(new TextWebSocketFrame(message));
-      }
+      dealWithBinaryFrame((BinaryWebSocketFrame)frame);
     }else if (frame instanceof CloseWebSocketFrame) {
       log.info("WebSocket Client received closing");
       ch.close();
     }
   }
 
-  private String dealWithBinaryFrame(BinaryWebSocketFrame frame) {
+  private void dealWithBinaryFrame(BinaryWebSocketFrame frame) {
     ByteBuf content = frame.content();
     byte[] data = new byte[content.readableBytes()];
     content.readBytes(data);
     if (frame.isFinalFragment()) {
-      return handler.onMessage(data);
-    }else {
-      currentMessage.append(Arrays.toString(data));
-      return null;
+      handler.onMessage(data);
     }
+    currentMessage.append(Arrays.toString(data));
   }
 
   private void dealWithTextFrame(TextWebSocketFrame frame) {

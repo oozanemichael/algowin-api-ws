@@ -1,39 +1,33 @@
-package org.mh.exchange.bibox;
+package org.mh.exchange.coinex;
 
 import io.reactivex.Completable;
-import org.knowm.xchange.bibox.BiboxExchange;
-import org.mh.exchange.bibox.parsing.BiboxStreamingFuturesParsing;
+import org.knowm.xchange.coinex.CoinexExchange;
+import org.mh.exchange.coinex.parsing.CoinexStreamingFuturesParsing;
 import org.mh.stream.exchange.core.ProductSubscription;
 import org.mh.stream.exchange.core.StreamingExchange;
 import org.mh.stream.exchange.core.StreamingMarketDataService;
 import org.mh.stream.exchange.core.StreamingParsingCurrencyPair;
 
-import java.util.Random;
-import java.util.UUID;
+public class CoinexStreamingExchange extends CoinexExchange implements StreamingExchange {
 
-public class BiboxStreamingExchange extends BiboxExchange implements StreamingExchange {
+    private static final String API_URI = "wss://socket.coinex.com/";
+    private static final String PERPETUAL_API_URI = "wss://perpetual.coinex.com/";
 
-    private static final String API_URI = "wss://push.bibox.com/";
-
-    BiboxStreamingService streamingService;
+    CoinexStreamingService streamingService;
 
     StreamingParsingCurrencyPair parsingCurrencyPair;
 
-    BiboxStreamingMarketDataService marketDataService;
+    CoinexStreamingMarketDataService marketDataService;
 
+    public CoinexStreamingExchange(){
 
-    public BiboxStreamingExchange(){
-        streamingService=new BiboxStreamingService(API_URI);
-        marketDataService=new BiboxStreamingMarketDataService(streamingService);
-    }
-
-    public BiboxStreamingService getStreamingService() {
-        return streamingService;
     }
 
     @Override
     public void instanceAsFutures() {
-        parsingCurrencyPair=new BiboxStreamingFuturesParsing();
+        streamingService=new CoinexStreamingService(PERPETUAL_API_URI);
+        marketDataService=new CoinexStreamingMarketDataService(streamingService);
+        parsingCurrencyPair=new CoinexStreamingFuturesParsing();
     }
 
     @Override

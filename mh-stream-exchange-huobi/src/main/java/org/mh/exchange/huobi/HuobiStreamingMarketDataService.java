@@ -48,7 +48,7 @@ public class HuobiStreamingMarketDataService implements StreamingMarketDataServi
                         listBids.add(new LimitOrder(Order.OrderType.BID,e.get(1).decimalValue(),currencyPair.getCurrencyPair(),null,date,e.get(0).decimalValue()));
                     });
                     tick.get("asks").forEach(e->{
-                        listAsks.add(new LimitOrder(Order.OrderType.BID,e.get(1).decimalValue(),currencyPair.getCurrencyPair(),null,date,e.get(0).decimalValue()));
+                        listAsks.add(new LimitOrder(Order.OrderType.ASK,e.get(1).decimalValue(),currencyPair.getCurrencyPair(),null,date,e.get(0).decimalValue()));
                     });
                     return new OrderBook(date,listAsks,listBids);
                 }

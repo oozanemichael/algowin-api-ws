@@ -1,9 +1,11 @@
 package org.mh.service.netty;
 
+import com.alibaba.fastjson.JSONObject;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.log4j.Log4j2;
+import org.mh.service.netty.util.GZIPUtils;
 
 import java.io.IOException;
 import java.time.Duration;
@@ -58,9 +60,29 @@ public abstract class JsonNettyStreamingService extends NettyStreamingService<Js
   }
 
   @Override
-  public String messageHandler(byte[] message) {
-    log.debug("Received message: {}", message);
-    return null;
+  public void messageHandler(byte[] message) {
+    String output = null;
+    try {
+      output = GZIPUtils.decompressGzip(message);
+    } catch (IOException e) {
+      log.error(e.getMessage());
+    }
+    log.debug("Received message: {}", output);
+    JsonNode jsonNode = null;
+    // 将传入消息解析为JSON
+    try {
+      jsonNode = objectMapper.readTree(output);
+    } catch (IOException e) {
+      log.error("Error parsing incoming message to JSON: {}", output);
+    }
+    if (processArrayMassageSeparately() && jsonNode.isArray()) {
+      // 如果是数组，分别处理每条消息。
+      for (JsonNode node : jsonNode) {
+        handleMessage(node);
+      }
+    } else {
+      handleMessage(jsonNode);
+    }
   }
 
   protected void sendObjectMessage(Object message) {

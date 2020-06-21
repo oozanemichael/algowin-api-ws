@@ -191,9 +191,10 @@ public abstract class NettyStreamingService<T> extends ConnectableService {
                                   public void onMessage(String message) {
                                     messageHandler(message);
                                   }
+
                                   @Override
-                                  public String onMessage(byte[] message) {
-                                    return messageHandler(message);
+                                  public void onMessage(byte[] message) {
+                                    messageHandler(message);
                                   }
                                 });
 
@@ -359,7 +360,7 @@ public abstract class NettyStreamingService<T> extends ConnectableService {
    *
    * @param message Content of the message from the server.
    */
-  public abstract String messageHandler(byte[] message);
+  public abstract void messageHandler(byte[] message);
 
 
 

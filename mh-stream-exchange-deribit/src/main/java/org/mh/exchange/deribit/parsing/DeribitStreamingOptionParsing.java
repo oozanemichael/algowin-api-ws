@@ -17,9 +17,9 @@ import java.util.Locale;
 public class DeribitStreamingOptionParsing implements StreamingParsingCurrencyPair {
 
     /**
-     * args[0] 期权到期日  true  date
-     * args[1] Strike  true  integer
-     * args[2] 看跌Put或看涨Call  true  integer  -1 = Put, 1 = Call
+     * @param args args[0] 期权到期日  true  Date
+     *             args[1] Strike  true  integer
+     *             args[2] 看跌Put或看涨Call  true  integer  -1 = Put, 1 = Call
      * */
     @Override
     public ParsingCurrencyPair parsing(CurrencyPair currencyPair, Object... args) {

@@ -44,7 +44,7 @@ import java.net.URI;
 @Log4j2
 public final class WebSocketClient {
 
-    static final String URL = System.getProperty("url", "wss://api-aws.huobi.pro/ws");
+    static final String URL = System.getProperty("url", "wss://push.bibox.com/");
 
     public static void main(String[] args) throws Exception {
         URI uri = new URI(URL);

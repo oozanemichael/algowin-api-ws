@@ -28,9 +28,7 @@ public class DeribitStreamingMarketDataService implements StreamingMarketDataSer
     }
 
     /**
-     * args[0]
-     * depth integer	1/10/20	Number of price levels to be included.
-     *
+     * @param args args[0] depth integer	1/10/20	Number of price levels to be included.
      *  channel eg: "book.ETH-PERPETUAL.100.1.100ms";
      * */
     @Override
@@ -49,7 +47,7 @@ public class DeribitStreamingMarketDataService implements StreamingMarketDataSer
                     );
                     data.get("asks").forEach(
                             asks->{
-                                listBids.add(new LimitOrder(Order.OrderType.BID,asks.get(1).decimalValue(),currencyPair.getCurrencyPair(),null,date,asks.get(0).decimalValue()));
+                                listAsks.add(new LimitOrder(Order.OrderType.ASK,asks.get(1).decimalValue(),currencyPair.getCurrencyPair(),null,date,asks.get(0).decimalValue()));
                             }
                     );
                     return new OrderBook(date,listAsks,listBids);

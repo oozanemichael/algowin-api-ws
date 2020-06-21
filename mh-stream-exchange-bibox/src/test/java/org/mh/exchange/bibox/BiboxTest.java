@@ -1,6 +1,7 @@
 package org.mh.exchange.bibox;
 
 import io.reactivex.Observable;
+import io.reactivex.disposables.Disposable;
 import lombok.extern.log4j.Log4j2;
 import org.knowm.xchange.currency.CurrencyPair;
 import org.knowm.xchange.dto.marketdata.OrderBook;
@@ -15,19 +16,15 @@ public class BiboxTest {
 
     public static void main(String[] args) {
 
-        StreamingExchange exchange =
-                StreamingExchangeFactory.INSTANCE.createExchange(BiboxStreamingExchange.class.getName(), TradingArea.FUTURE);
-
+        StreamingExchange exchange =StreamingExchangeFactory.INSTANCE.createExchange(BiboxStreamingExchange.class.getName(), TradingArea.FUTURE);
         exchange.connect().blockingAwait();
-
-        StreamingParsingCurrencyPair parsing=exchange.getStreamingParsingCurrencyPair();
-        Observable<OrderBook> observable=exchange.getStreamingMarketDataService().getOrderBook(parsing.parsing(CurrencyPair.ETH_USD),1);
-        observable.subscribe(o -> {
-            o.getAsks().forEach(e->{
-                log.warn("ask: :"+e.getLimitPrice()+" amount:"+e.getOriginalAmount());
-            });
+        StreamingParsingCurrencyPair parsing= exchange.getStreamingParsingCurrencyPair();
+        Observable<OrderBook> observable=exchange.getStreamingMarketDataService().getOrderBook(parsing.parsing(CurrencyPair.BTC_USDT));
+        Disposable disposable=observable.subscribe(o -> {
+            log.warn(o.getAsks());
         });
 
+        disposable.dispose();
     }
 
 }

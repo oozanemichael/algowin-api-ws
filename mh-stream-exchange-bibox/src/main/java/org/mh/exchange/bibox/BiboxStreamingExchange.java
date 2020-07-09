@@ -8,8 +8,6 @@ import org.mh.stream.exchange.core.StreamingExchange;
 import org.mh.stream.exchange.core.StreamingMarketDataService;
 import org.mh.stream.exchange.core.StreamingParsingCurrencyPair;
 
-import java.util.Random;
-import java.util.UUID;
 
 public class BiboxStreamingExchange extends BiboxExchange implements StreamingExchange {
 

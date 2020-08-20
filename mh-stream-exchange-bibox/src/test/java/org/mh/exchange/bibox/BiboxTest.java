@@ -2,26 +2,24 @@ package org.mh.exchange.bibox;
 
 import io.reactivex.Observable;
 import io.reactivex.disposables.Disposable;
-import lombok.extern.log4j.Log4j2;
+
 import org.knowm.xchange.currency.CurrencyPair;
 import org.knowm.xchange.dto.marketdata.OrderBook;
-import org.knowm.xchange.exceptions.NotYetImplementedForExchangeException;
-import org.mh.stream.exchange.core.StreamingExchange;
-import org.mh.stream.exchange.core.StreamingExchangeFactory;
-import org.mh.stream.exchange.core.StreamingParsingCurrencyPair;
-import org.mh.stream.exchange.core.TradingArea;
+import org.mh.stream.exchange.core.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-@Log4j2
 public class BiboxTest {
 
-    public static void main(String[] args) {
+    private static final Logger log = LoggerFactory.getLogger(BiboxTest.class);
 
-        StreamingExchange exchange =StreamingExchangeFactory.INSTANCE.createExchange(BiboxStreamingExchange.class.getName(), TradingArea.FUTURE);
+    public static void main(String[] args) {
+        StreamingExchange exchange =StreamingExchangeFactory.INSTANCE.createExchange(BiboxStreamingExchange.class.getName(), TradingArea.Futures);
         exchange.connect().blockingAwait();
         StreamingParsingCurrencyPair parsing= exchange.getStreamingParsingCurrencyPair();
         Observable<OrderBook> observable=exchange.getStreamingMarketDataService().getOrderBook(parsing.parsing(CurrencyPair.BTC_USDT));
         Disposable disposable=observable.subscribe(o -> {
-            log.warn(o.getAsks());
+            log.warn("{}",o.getAsks());
         });
 
         disposable.dispose();

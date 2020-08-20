@@ -2,11 +2,8 @@ package org.mh.exchange.coinex;
 
 import io.reactivex.Completable;
 import org.knowm.xchange.coinex.CoinexExchange;
-import org.mh.exchange.coinex.parsing.CoinexStreamingFuturesParsing;
-import org.mh.stream.exchange.core.ProductSubscription;
-import org.mh.stream.exchange.core.StreamingExchange;
-import org.mh.stream.exchange.core.StreamingMarketDataService;
-import org.mh.stream.exchange.core.StreamingParsingCurrencyPair;
+import org.mh.exchange.coinex.parsing.CoinexStreamingParsing;
+import org.mh.stream.exchange.core.*;
 
 public class CoinexStreamingExchange extends CoinexExchange implements StreamingExchange {
 
@@ -24,10 +21,10 @@ public class CoinexStreamingExchange extends CoinexExchange implements Streaming
     }
 
     @Override
-    public void instanceAsFutures() {
+    public void instance(TradingArea tradingArea) {
         streamingService=new CoinexStreamingService(PERPETUAL_API_URI);
         marketDataService=new CoinexStreamingMarketDataService(streamingService);
-        parsingCurrencyPair=new CoinexStreamingFuturesParsing();
+        parsingCurrencyPair=new CoinexStreamingParsing(tradingArea);
     }
 
     @Override

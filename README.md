@@ -9,8 +9,9 @@
 | deribit | √ | × |
 | huobi | √ | × |
 | hbtc | √ | × |
+| binance | √ | × |
 
-### coinex 
+# coinex 
 + orderBook 
 一次连接只能订阅一种币对
 ```
@@ -28,3 +29,27 @@
                   args[1] interval: Merge，String
 
 ```
+
+# deribit
+
++ orderBook 
+
+book.{instrument_name}.{group}.{depth}.{interval}
+     
+| Parameter | Required | Type | Enum | Description |
+| :-----| :----- | :----- | :----- | :----- |
+| instrument_name | true | string |  | Instrument name |
+| group | true | string | 	none 1/ 2/ 5/ 10/ 25/ 100/ 250 | Allowed values for BTC - none, 1, 2, 5, 10 , Allowed values for ETH - none, 5, 10, 25, 100, 250 |
+| depth | true | integer | 1,10,20 | Number of price levels to be included. |
+| interval | true | string | 100ms | Frequency of notifications. Events will be aggregated over this interval. |
+    
+      channel eg: "book.ETH-PERPETUAL.100.1.100ms";
+
+```
+     @param args args[0] depth Integer	1/10/20	Number of price levels to be included.
+```
+
+# binance
+
+
+

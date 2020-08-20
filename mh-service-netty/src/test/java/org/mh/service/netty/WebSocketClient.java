@@ -22,7 +22,9 @@ import io.netty.handler.codec.http.websocketx.extensions.compression.WebSocketCl
 import io.netty.handler.ssl.SslContext;
 import io.netty.handler.ssl.SslContextBuilder;
 import io.netty.handler.ssl.util.InsecureTrustManagerFactory;
-import lombok.extern.log4j.Log4j2;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -41,8 +43,9 @@ import java.net.URI;
  * You don't have to specify any arguments if you want to connect to the example WebSocket server,
  * as this is the default.
  */
-@Log4j2
 public final class WebSocketClient {
+
+    private static final Logger log = LoggerFactory.getLogger(WebSocketClient.class);
 
     static final String URL = System.getProperty("url", "wss://push.bibox.com/");
 

@@ -1,9 +1,7 @@
 package org.mh.stream.exchange.core;
 
-import lombok.Data;
 import org.knowm.xchange.currency.CurrencyPair;
 
-@Data
 public class ParsingCurrencyPair {
 
     /**
@@ -13,8 +11,23 @@ public class ParsingCurrencyPair {
 
     CurrencyPair currencyPair;
 
+    public String getParsing() {
+        return parsing;
+    }
 
-    public ParsingCurrencyPair(String parsing,CurrencyPair currencyPair){
+    public CurrencyPair getCurrencyPair() {
+        return currencyPair;
+    }
+
+    public void setParsing(String parsing) {
+        this.parsing = parsing;
+    }
+
+    public void setCurrencyPair(CurrencyPair currencyPair) {
+        this.currencyPair = currencyPair;
+    }
+
+    public ParsingCurrencyPair(String parsing, CurrencyPair currencyPair){
         this.parsing=parsing;
         this.currencyPair=currencyPair;
     }

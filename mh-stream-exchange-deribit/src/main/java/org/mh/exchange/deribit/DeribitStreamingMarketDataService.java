@@ -28,12 +28,13 @@ public class DeribitStreamingMarketDataService implements StreamingMarketDataSer
     }
 
     /**
-     * @param args args[0] depth integer	1/10/20	Number of price levels to be included.
+     * @param args args[0] depth Integer	1/10/20	Number of price levels to be included.
      *  channel eg: "book.ETH-PERPETUAL.100.1.100ms";
      * */
     @Override
     public Observable<OrderBook> getOrderBook(ParsingCurrencyPair currencyPair, Object... args) {
-        String channel="book."+currencyPair.getParsing()+".none."+(Integer)args[0]+".100ms";
+        //String channel="book."+currencyPair.getParsing()+".none."+(args.length<1?1:(Integer)args[0])+".100ms";
+        String channel="book."+currencyPair.getParsing()+".none."+10+".100ms";
         return streamingService.subscribeChannel(channel,"public/subscribe")
                 .map(o->{
                     JsonNode data=o.get("params").get("data");

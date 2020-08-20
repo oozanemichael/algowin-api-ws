@@ -1,10 +1,13 @@
 package org.mh.service.netty.test;
 
 import io.reactivex.Completable;
-import lombok.extern.log4j.Log4j2;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-@Log4j2
+
 public class RxJavaCompletable01 {
+
+    private static final Logger log = LoggerFactory.getLogger(RxJavaCompletable01.class);
 
     public static void main(String[] args) {
         Completable.create(completable -> log.info("ss")).subscribe();

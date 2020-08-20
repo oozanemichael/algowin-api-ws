@@ -2,12 +2,15 @@ package org.mh.exchange.huobi;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import lombok.extern.log4j.Log4j2;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 
 import java.io.IOException;
 
-@Log4j2
 public class JsonNodeTest {
+
+    private static final Logger log = LoggerFactory.getLogger(JsonNodeTest.class);
 
     public static void main(String[] args) {
         String json=new String("{\n" +
@@ -30,9 +33,9 @@ public class JsonNodeTest {
         try {
             JsonNode jsonNode = mapper.readTree(json);
             jsonNode.get("tick").get("bids").forEach(e->{
-                log.info(e);
-                log.info(e.get(0));
-                log.info(e.get(1));
+                log.info("{}",e);
+                log.info("{}",e.get(0));
+                log.info("{}",e.get(1));
             });
         } catch (IOException e) {
             e.printStackTrace();

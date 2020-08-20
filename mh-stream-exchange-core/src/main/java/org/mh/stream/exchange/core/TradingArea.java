@@ -5,16 +5,26 @@ public enum TradingArea {
     /**
      * 现货，币币
      * */
-    SPOT,
+    Spot,
 
     /**
-     * 期货，永续
+     * 杠杆交易
      * */
-    FUTURE,
+    Margin,
 
     /**
-    * 期权
-    * */
-    OPTION;
+     * 永续和约
+     * */
+    PerpetualSwap,
+
+    /**
+     * 期货交易
+     * */
+    Futures,
+
+    /**
+     * 期权
+     * */
+    Options;
 
 }

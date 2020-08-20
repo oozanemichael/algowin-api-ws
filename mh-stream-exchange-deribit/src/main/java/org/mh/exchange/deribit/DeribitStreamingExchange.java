@@ -9,12 +9,8 @@ import org.knowm.xchange.exceptions.ExchangeException;
 import org.knowm.xchange.service.account.AccountService;
 import org.knowm.xchange.service.marketdata.MarketDataService;
 import org.knowm.xchange.service.trade.TradeService;
-import org.mh.exchange.deribit.parsing.DeribitStreamingFuturesParsing;
-import org.mh.exchange.deribit.parsing.DeribitStreamingOptionParsing;
-import org.mh.stream.exchange.core.ProductSubscription;
-import org.mh.stream.exchange.core.StreamingExchange;
-import org.mh.stream.exchange.core.StreamingMarketDataService;
-import org.mh.stream.exchange.core.StreamingParsingCurrencyPair;
+import org.mh.exchange.deribit.parsing.DeribitStreamingParsing;
+import org.mh.stream.exchange.core.*;
 import si.mazi.rescu.SynchronizedValueFactory;
 
 import java.io.IOException;
@@ -57,14 +53,10 @@ public class DeribitStreamingExchange extends DeribitExchange implements Streami
 
 
     @Override
-    public void instanceAsFutures() {
-        parsingCurrencyPair=new DeribitStreamingFuturesParsing();
+    public void instance(TradingArea tradingArea) {
+        parsingCurrencyPair=new DeribitStreamingParsing(tradingArea);
     }
 
-    @Override
-    public void instanceAsOption() {
-        parsingCurrencyPair=new DeribitStreamingOptionParsing();
-    }
 
     @Override
     public Completable connect(ProductSubscription... args) {

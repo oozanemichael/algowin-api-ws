@@ -1,21 +1,22 @@
 package org.mh.service.netty;
 
-import com.alibaba.fastjson.JSONObject;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.*;
 import io.netty.handler.codec.http.FullHttpResponse;
 import io.netty.handler.codec.http.websocketx.*;
 import io.netty.util.CharsetUtil;
-import lombok.extern.log4j.Log4j2;
-import org.mh.service.netty.util.GZIPUtils;
 
-import java.io.IOException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.Arrays;
-import java.util.Objects;
 
-@Log4j2
+
 public class WebSocketClientHandler extends SimpleChannelInboundHandler<Object> {
-    private final StringBuilder currentMessage = new StringBuilder();
+
+  private static final Logger log = LoggerFactory.getLogger(WebSocketClientHandler.class);
+
+  private final StringBuilder currentMessage = new StringBuilder();
 
   public interface WebSocketMessageHandler {
     public void onMessage(String message);

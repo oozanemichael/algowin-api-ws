@@ -4,7 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.reactivex.Observable;
-import lombok.extern.log4j.Log4j2;
+
 import org.knowm.xchange.dto.Order;
 import org.knowm.xchange.dto.marketdata.OrderBook;
 import org.knowm.xchange.dto.marketdata.Ticker;
@@ -14,13 +14,11 @@ import org.mh.service.netty.util.GZIPUtils;
 import org.mh.stream.exchange.core.ParsingCurrencyPair;
 import org.mh.stream.exchange.core.StreamingMarketDataService;
 
-import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-@Log4j2
 public class BiboxStreamingMarketDataService implements StreamingMarketDataService {
 
 

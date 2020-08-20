@@ -9,11 +9,8 @@ import org.knowm.xchange.huobi.HuobiExchange;
 import org.knowm.xchange.service.account.AccountService;
 import org.knowm.xchange.service.marketdata.MarketDataService;
 import org.knowm.xchange.service.trade.TradeService;
-import org.mh.exchange.huobi.currencyPair.HuobiStreamingSpotParsing;
-import org.mh.stream.exchange.core.ProductSubscription;
-import org.mh.stream.exchange.core.StreamingExchange;
-import org.mh.stream.exchange.core.StreamingMarketDataService;
-import org.mh.stream.exchange.core.StreamingParsingCurrencyPair;
+import org.mh.exchange.huobi.currencyPair.HuobiStreamingParsing;
+import org.mh.stream.exchange.core.*;
 import si.mazi.rescu.SynchronizedValueFactory;
 
 import java.io.IOException;
@@ -35,10 +32,10 @@ public class HuobiStreamingExchange extends HuobiExchange implements StreamingEx
 
 
     @Override
-    public void instanceAsSpot() {
+    public void instance(TradingArea tradingArea) {
         this.streamingService=new HuobiStreamingService(AWS_API_URI);
         this.streamingMarketDataService = new HuobiStreamingMarketDataService(streamingService, this);
-        this.parsingCurrencyPair = new HuobiStreamingSpotParsing();
+        this.parsingCurrencyPair = new HuobiStreamingParsing(tradingArea);
     }
 
     @Override

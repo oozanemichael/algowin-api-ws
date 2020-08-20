@@ -44,6 +44,15 @@ public class DeribitStreamingService extends JsonNettyStreamingService {
 
     @Override
     public String getUnsubscribeMessage(String channelName) throws IOException {
-        return null;
+        JSONObject json=new JSONObject();
+        json.put("jsonrpc","2.0");
+        json.put("method","public/unsubscribe");
+        json.put("id",new Random().nextInt(1000000000));
+        JSONObject params=new JSONObject();
+        JSONArray channels=new JSONArray();
+        channels.add(channelName);
+        params.put("channels",channels);
+        json.put("params", params);
+        return json.toJSONString();
     }
 }

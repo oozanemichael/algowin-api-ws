@@ -40,7 +40,9 @@ import io.reactivex.Completable;
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.subjects.PublishSubject;
-import lombok.extern.log4j.Log4j2;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 
 import java.io.IOException;
 import java.net.URI;
@@ -54,9 +56,9 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-@Log4j2
 public abstract class NettyStreamingService<T> extends ConnectableService {
 
+  private static final Logger log = LoggerFactory.getLogger(NettyStreamingService.class);
 
   protected static final Duration DEFAULT_CONNECTION_TIMEOUT = Duration.ofSeconds(10);
   protected static final Duration DEFAULT_RETRY_DURATION = Duration.ofSeconds(15);

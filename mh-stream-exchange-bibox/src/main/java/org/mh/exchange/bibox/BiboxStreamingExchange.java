@@ -2,11 +2,8 @@ package org.mh.exchange.bibox;
 
 import io.reactivex.Completable;
 import org.knowm.xchange.bibox.BiboxExchange;
-import org.mh.exchange.bibox.parsing.BiboxStreamingFuturesParsing;
-import org.mh.stream.exchange.core.ProductSubscription;
-import org.mh.stream.exchange.core.StreamingExchange;
-import org.mh.stream.exchange.core.StreamingMarketDataService;
-import org.mh.stream.exchange.core.StreamingParsingCurrencyPair;
+import org.mh.exchange.bibox.parsing.BiboxStreamingParsing;
+import org.mh.stream.exchange.core.*;
 
 
 public class BiboxStreamingExchange extends BiboxExchange implements StreamingExchange {
@@ -29,9 +26,10 @@ public class BiboxStreamingExchange extends BiboxExchange implements StreamingEx
         return streamingService;
     }
 
+
     @Override
-    public void instanceAsFutures() {
-        parsingCurrencyPair=new BiboxStreamingFuturesParsing();
+    public void instance(TradingArea area) {
+        parsingCurrencyPair=new BiboxStreamingParsing(area);
     }
 
     @Override

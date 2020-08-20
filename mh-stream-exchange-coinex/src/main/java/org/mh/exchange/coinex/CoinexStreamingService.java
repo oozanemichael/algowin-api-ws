@@ -2,11 +2,14 @@ package org.mh.exchange.coinex;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import org.mh.service.netty.JsonNettyStreamingService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 
 public class CoinexStreamingService extends JsonNettyStreamingService {
 
+    private static final Logger log=LoggerFactory.getLogger(CoinexStreamingService.class);
 
     public CoinexStreamingService(String apiUrl) {
         super(apiUrl);
@@ -14,6 +17,7 @@ public class CoinexStreamingService extends JsonNettyStreamingService {
 
     @Override
     protected String getChannelNameFromMessage(JsonNode message) throws IOException {
+        //log.info("{}",message);
         if(message.hasNonNull("method")){
             return message.get("method").asText();
         }

@@ -18,36 +18,6 @@ public interface StreamingExchange extends Exchange {
 
 
   default void instance(TradingArea area){
-    switch (area){
-      case SPOT:
-        instanceAsSpot();
-        break;
-      case FUTURE:
-        instanceAsFutures();
-        break;
-      case OPTION:
-        instanceAsOption();
-        break;
-    }
-
-  }
-
-  default void instance(Object... args){
-    throw new NotYetImplementedForExchangeException();
-  }
-
-  /**期货交易初始化*/
-  default void instanceAsFutures() {
-    throw new NotYetImplementedForExchangeException();
-  }
-
-  /**期权交易初始化*/
-  default void instanceAsOption() {
-    throw new NotYetImplementedForExchangeException();
-  }
-
-  /**现货交易初始化*/
-  default void instanceAsSpot() {
     throw new NotYetImplementedForExchangeException();
   }
 
@@ -114,6 +84,9 @@ public interface StreamingExchange extends Exchange {
     throw new NotYetImplementedForExchangeException();
   }
 
+  /**
+   * 重新订阅频道
+   * */
   default void resubscribeChannels() {
     throw new NotYetImplementedForExchangeException();
   }

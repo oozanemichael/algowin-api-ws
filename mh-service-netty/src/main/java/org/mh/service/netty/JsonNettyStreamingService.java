@@ -1,17 +1,19 @@
 package org.mh.service.netty;
 
-import com.alibaba.fastjson.JSONObject;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import lombok.extern.log4j.Log4j2;
+
 import org.mh.service.netty.util.GZIPUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.time.Duration;
 
-@Log4j2
 public abstract class JsonNettyStreamingService extends NettyStreamingService<JsonNode> {
+
+  private static final Logger log = LoggerFactory.getLogger(JsonNettyStreamingService.class);
 
   protected final ObjectMapper objectMapper = StreamingObjectMapperHelper.getObjectMapper();
 

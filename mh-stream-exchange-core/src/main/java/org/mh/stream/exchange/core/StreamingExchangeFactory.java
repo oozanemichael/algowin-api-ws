@@ -1,10 +1,12 @@
 package org.mh.stream.exchange.core;
 
-import lombok.extern.log4j.Log4j2;
+
 import org.knowm.xchange.Exchange;
 import org.knowm.xchange.ExchangeSpecification;
 import org.knowm.xchange.exceptions.ExchangeException;
 import org.knowm.xchange.utils.Assert;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 /**
@@ -14,9 +16,11 @@ import org.knowm.xchange.utils.Assert;
  *   <li>Manages the creation of specific Exchange implementations using runtime dependencies
  * </ul>
  */
-@Log4j2
 public enum StreamingExchangeFactory {
+
   INSTANCE;
+
+  private static final Logger log = LoggerFactory.getLogger(StreamingExchangeFactory.class);
 
   /** Constructor */
   private StreamingExchangeFactory() {}
@@ -93,16 +97,6 @@ public enum StreamingExchangeFactory {
     return exchange;
   }
 
-  public StreamingExchange createExchange(String exchangeClassName,Object... args) {
-
-    StreamingExchange exchange = getExchange(exchangeClassName);
-
-    exchange.instance(args);
-
-    exchange.applySpecification(exchange.getDefaultExchangeSpecification());
-
-    return exchange;
-  }
 
   public StreamingExchange getExchange(String exchangeClassName) {
 

@@ -1,24 +1,21 @@
 package org.mh.exchange.deribit;
 
 import io.reactivex.Observable;
-import lombok.extern.log4j.Log4j2;
-import org.knowm.xchange.ExchangeSpecification;
+import io.reactivex.disposables.Disposable;
 import org.knowm.xchange.currency.CurrencyPair;
 import org.knowm.xchange.dto.marketdata.OrderBook;
-import org.mh.stream.exchange.core.StreamingExchange;
-import org.mh.stream.exchange.core.StreamingExchangeFactory;
-import org.mh.stream.exchange.core.StreamingParsingCurrencyPair;
-import org.mh.stream.exchange.core.TradingArea;
-import org.mh.stream.exchange.util.LocalExchangeConfig;
-import org.mh.stream.exchange.util.PropsLoader;
+import org.mh.stream.exchange.core.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-@Log4j2
 public class DeribitTest {
 
-    public static void main(String[] args) {
+    private static final Logger log = LoggerFactory.getLogger(DeribitTest.class);
+
+    public static void main(String[] args) throws InterruptedException {
 
         StreamingExchange exchange =
-                StreamingExchangeFactory.INSTANCE.createExchange(DeribitStreamingExchange.class.getName(), TradingArea.FUTURE);
+                StreamingExchangeFactory.INSTANCE.createExchange(DeribitStreamingExchange.class.getName(), TradingArea.Futures);
 
 /*        ExchangeSpecification defaultExchangeSpecification = exchange.getDefaultExchangeSpecification();
         //defaultExchangeSpecification.setExchangeSpecificParametersItem("Use_Sandbox", true);
@@ -28,14 +25,11 @@ public class DeribitTest {
 
         exchange.connect().blockingAwait();
         StreamingParsingCurrencyPair parsing=exchange.getStreamingParsingCurrencyPair();
-        Observable<OrderBook> observable=exchange.getStreamingMarketDataService().getOrderBook(parsing.parsing(CurrencyPair.ETH_USD),1);
-        observable.subscribe(o -> {
-            log.warn("BTC_USDT");
-/*            o.getAsks().forEach(e->{
-                log.warn("ask: :"+e.getLimitPrice()+" amount:"+e.getOriginalAmount());
-            });*/
+        Observable<OrderBook> observable=exchange.getStreamingMarketDataService().getOrderBook(parsing.parsing(CurrencyPair.BTC_USD),10);
+        Disposable disposable=observable.subscribe(o -> {
+            log.warn("{}",o.getAsks());
+            log.warn("{}",o.getBids());
         });
-
 
 
     }

@@ -1,15 +1,33 @@
 # mh-exchange-ws 交易所websocket对接
+[toc]
 
 ## market data
 
-| 交易所 | orderBook | ticker |
-| :-----| :----- | :----- |
-| bibox | √ | × |
-| coinex | √ | × |
-| deribit | √ | × |
-| huobi | √ | × |
-| hbtc | √ | × |
-| binance | √ | × |
+| 交易所 | orderBook | ticker | trades |
+| :-----| :----- | :----- | :----- |
+| bibox | √ | × | × |
+| coinex | √ | × | × |
+| deribit | √ | × | × |
+| huobi | √ | × | × |
+| hbtc | √ | × | × |
+| binance | √ | × | × |
+<br></br>
+eg:
+```
+//订阅Coinex 永续 BTC_USD
+StreamingExchange exchange =
+        StreamingExchangeFactory.INSTANCE.createExchange(CoinexStreamingExchange.class.getName(), TradingArea.Futures);
+StreamingParsingCurrencyPair parsing=exchangess.getStreamingParsingCurrencyPair();
+exchange.connect().blockingAwait();
+Observable<OrderBook> observable=exchanges.getStreamingMarketDataService().getOrderBook(parsing.parsing(CurrencyPair.BTC_USD));
+Disposable disposable=observabless.subscribe(o -> {
+    log.info("ask: "+o.getAsks());
+    log.warn("bid: "+o.getBids());
+});
+
+//取消订阅
+disposable.dispose();
+```
 
 # coinex 
 + orderBook 

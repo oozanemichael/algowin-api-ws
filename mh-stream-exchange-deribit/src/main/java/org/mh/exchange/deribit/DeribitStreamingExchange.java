@@ -2,9 +2,10 @@ package org.mh.exchange.deribit;
 
 import io.reactivex.Completable;
 import org.knowm.xchange.ExchangeSpecification;
+import org.knowm.xchange.dto.meta.ExchangeMetaData;
+import org.mh.stream.exchange.core.TradingArea;
 import org.knowm.xchange.currency.CurrencyPair;
 import org.knowm.xchange.deribit.v2.DeribitExchange;
-import org.knowm.xchange.dto.meta.ExchangeMetaData;
 import org.knowm.xchange.exceptions.ExchangeException;
 import org.knowm.xchange.service.account.AccountService;
 import org.knowm.xchange.service.marketdata.MarketDataService;
@@ -87,6 +88,7 @@ public class DeribitStreamingExchange extends DeribitExchange implements Streami
     public void useCompressedMessages(boolean compressedMessages) {
 
     }
+
 
     @Override
     public ExchangeSpecification getExchangeSpecification() {

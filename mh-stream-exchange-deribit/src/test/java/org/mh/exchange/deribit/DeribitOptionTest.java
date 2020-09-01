@@ -21,7 +21,7 @@ public class DeribitOptionTest {
 
     public static void main(String[] args) {
         StreamingExchange exchange =
-                StreamingExchangeFactory.INSTANCE.createExchange(DeribitStreamingExchange.class.getName(), TradingArea.Options);
+                StreamingExchangeFactory.INSTANCE.createExchange(DeribitStreamingExchange.class.getName(), TradingArea.Option);
         exchange.connect().blockingAwait();
         StreamingParsingCurrencyPair parsing=exchange.getStreamingParsingCurrencyPair();
         DateFormat dateFormat1 = new SimpleDateFormat("yyyy-MM-dd");

@@ -12,6 +12,7 @@
 | hbtc | √ | × | × |
 | binance | √ | × | × |
 <br></br>
+
 eg:
 ```
 //订阅Coinex 永续 BTC_USD

@@ -2,6 +2,7 @@ package org.mh.exchange.bibox;
 
 import io.reactivex.Completable;
 import org.knowm.xchange.bibox.BiboxExchange;
+import org.mh.stream.exchange.core.TradingArea;
 import org.mh.exchange.bibox.parsing.BiboxStreamingParsing;
 import org.mh.stream.exchange.core.*;
 

@@ -1,20 +1,20 @@
 package org.mh.exchange.binance;
 
 import com.google.common.base.MoreObjects;
+import org.knowm.xchange.binance.BinanceAuthenticated;
+import org.knowm.xchange.binance.BinanceExchange;
+import org.knowm.xchange.binance.service.BinanceMarketDataService;
+import org.mh.stream.exchange.core.TradingArea;
+import org.knowm.xchange.service.BaseExchangeService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.mh.exchange.binance.BinanceUserDataChannel.NoActiveChannelException;
 
 import io.reactivex.Completable;
 import io.reactivex.Observable;
-import org.knowm.xchange.binance.BinanceAuthenticated;
-import org.knowm.xchange.binance.BinanceExchange;
-import org.knowm.xchange.binance.service.BinanceMarketDataService;
 import org.knowm.xchange.currency.CurrencyPair;
-import org.knowm.xchange.service.BaseExchangeService;
 import org.mh.stream.exchange.core.ProductSubscription;
 import org.mh.stream.exchange.core.StreamingParsingCurrencyPair;
-import org.mh.stream.exchange.core.TradingArea;
 import org.mh.stream.exchange.util.Events;
 import si.mazi.rescu.RestProxyFactory;
 import org.mh.stream.exchange.core.StreamingExchange;

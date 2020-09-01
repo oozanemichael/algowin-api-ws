@@ -1,9 +1,10 @@
 package org.mh.exchange.bibox.parsing;
 
+import org.mh.stream.exchange.core.TradingArea;
 import org.knowm.xchange.currency.CurrencyPair;
 import org.mh.stream.exchange.core.ParsingCurrencyPair;
 import org.mh.stream.exchange.core.StreamingParsing;
-import org.mh.stream.exchange.core.TradingArea;
+
 
 public class BiboxStreamingParsing extends StreamingParsing {
     

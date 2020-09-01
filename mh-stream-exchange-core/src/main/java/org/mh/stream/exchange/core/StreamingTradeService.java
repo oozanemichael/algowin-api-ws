@@ -1,12 +1,11 @@
 package org.mh.stream.exchange.core;
 
 import io.reactivex.Observable;
-import org.knowm.xchange.currency.CurrencyPair;
 import org.knowm.xchange.dto.Order;
 import org.knowm.xchange.dto.trade.UserTrade;
 import org.knowm.xchange.exceptions.ExchangeSecurityException;
 import org.knowm.xchange.exceptions.NotYetImplementedForExchangeException;
-import org.knowm.xchange.service.trade.TradeService;
+import org.knowm.xchange.service.trade.params.TradeHistoryParams;
 
 public interface StreamingTradeService {
 
@@ -18,7 +17,7 @@ public interface StreamingTradeService {
    * connection. Most exchanges have a recommended approach for managing this, involving timestamps,
    * sequence numbers and a separate REST API for re-sync when inconsistencies appear. You should
    * implement these approaches, if required, by combining calls to this method with {@link
-   * TradeService#getOpenOrders()}.
+   * org.knowm.xchange.service.trade.TradeService#getOpenOrders()}.
    *
    * <p><strong>Emits</strong> {@link
    * org.mh.service.core.exception.NotConnectedException} When not connected to the
@@ -28,7 +27,7 @@ public interface StreamingTradeService {
    * authentication details
    *
    * @param currencyPair Currency pair of the order changes.
-   * @return {@link Observable} that emits {@link Order} when exchange sends the update.
+   * @return {@link Observable} that emits {@link org.knowm.xchange.dto.Order} when exchange sends the update.
    */
   default Observable<Order> getOrderChanges(ParsingCurrencyPair currencyPair, Object... args) {
     throw new NotYetImplementedForExchangeException();
@@ -42,7 +41,7 @@ public interface StreamingTradeService {
    * connection. Most exchanges have a recommended approach for managing this, involving timestamps,
    * sequence numbers and a separate REST API for re-sync when inconsistencies appear. You should
    * implement these approaches, if required, by combining calls to this method with {@link
-   * TradeService#getTradeHistory(org.knowm.xchange.service.trade.params.TradeHistoryParams)}
+   * org.knowm.xchange.service.trade.TradeService#getTradeHistory(TradeHistoryParams)} (org.knowm.xchange.service.trade.params.TradeHistoryParams)}
    *
    * <p><strong>Emits</strong> {@link
    * org.mh.service.core.exception.NotConnectedException} When not connected to the

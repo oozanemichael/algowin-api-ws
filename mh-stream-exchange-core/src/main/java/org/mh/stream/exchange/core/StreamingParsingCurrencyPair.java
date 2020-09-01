@@ -10,7 +10,7 @@ public interface StreamingParsingCurrencyPair {
     /**
      * 解析
      * */
-    ParsingCurrencyPair parsing(CurrencyPair currencyPair,Object... args);
+    ParsingCurrencyPair parsing(CurrencyPair currencyPair, Object... args);
 
 
 

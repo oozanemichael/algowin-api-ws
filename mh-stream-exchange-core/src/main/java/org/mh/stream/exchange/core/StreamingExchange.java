@@ -1,12 +1,12 @@
 package org.mh.stream.exchange.core;
 
+import org.knowm.xchange.Exchange;
+import org.knowm.xchange.exceptions.NotYetImplementedForExchangeException;
 import org.mh.service.core.ConnectableService;
 import io.netty.channel.ChannelHandlerContext;
 import io.reactivex.Completable;
 import io.reactivex.Observable;
-import org.knowm.xchange.Exchange;
 import org.knowm.xchange.ExchangeSpecification;
-import org.knowm.xchange.exceptions.NotYetImplementedForExchangeException;
 import org.mh.service.netty.NettyStreamingService;
 
 public interface StreamingExchange extends Exchange {

@@ -11,6 +11,8 @@ public class ParsingCurrencyPair {
 
     CurrencyPair currencyPair;
 
+    Object[] objects;
+
     public String getParsing() {
         return parsing;
     }
@@ -27,9 +29,23 @@ public class ParsingCurrencyPair {
         this.currencyPair = currencyPair;
     }
 
+    public Object[] getObjects() {
+        return objects;
+    }
+
+    public void setObjects(Object[] objects) {
+        this.objects = objects;
+    }
+
     public ParsingCurrencyPair(String parsing, CurrencyPair currencyPair){
         this.parsing=parsing;
         this.currencyPair=currencyPair;
+    }
+
+    public ParsingCurrencyPair(String parsing, CurrencyPair currencyPair,Object[] objects){
+        this.parsing=parsing;
+        this.currencyPair=currencyPair;
+        this.objects=objects;
     }
 
 }

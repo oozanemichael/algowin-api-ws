@@ -1,12 +1,9 @@
 package org.mh.stream.exchange.core;
 
 import io.reactivex.Observable;
-import org.knowm.xchange.currency.CurrencyPair;
 import org.knowm.xchange.dto.marketdata.OrderBook;
 import org.knowm.xchange.dto.marketdata.Ticker;
 import org.knowm.xchange.dto.marketdata.Trade;
-import org.mh.stream.exchange.exception.NumberOfSubscriptionsException;
-
 public interface StreamingMarketDataService {
   /**
    * Get an order book representing the current offered exchange rates (market depth).

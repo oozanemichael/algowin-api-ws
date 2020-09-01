@@ -16,7 +16,7 @@ public class StreamingParsing implements StreamingParsingCurrencyPair{
             case PerpetualSwap:
                 parsingCurrencyPair= this::instancePerpetualSwap;
                 break;
-            case Options:
+            case Option:
                 parsingCurrencyPair= this::instanceOptions;
                 break;
             case Spot:

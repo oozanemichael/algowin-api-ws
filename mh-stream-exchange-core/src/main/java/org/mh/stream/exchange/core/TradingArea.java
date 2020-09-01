@@ -25,6 +25,6 @@ public enum TradingArea {
     /**
      * 期权
      * */
-    Options;
+    Option;
 
 }

@@ -3,8 +3,8 @@ package org.mh.stream.exchange.core;
 
 import org.knowm.xchange.Exchange;
 import org.knowm.xchange.ExchangeSpecification;
-import org.knowm.xchange.exceptions.ExchangeException;
 import org.knowm.xchange.utils.Assert;
+import org.knowm.xchange.exceptions.ExchangeException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -29,11 +29,11 @@ public enum StreamingExchangeFactory {
    * Create an Exchange object without default ExchangeSpecification
    *
    * <p>The factory is parameterised with the name of the exchange implementation class. This must
-   * be a class extending {@link org.knowm.xchange.Exchange}.
+   * be a class extending {@link Exchange}.
    *
    * @param exchangeClassName the fully-qualified class name of the exchange
    * @return a new exchange instance configured with the default {@link
-   *     org.knowm.xchange.ExchangeSpecification}
+   *     ExchangeSpecification}
    */
   public StreamingExchange createExchangeWithoutSpecification(String exchangeClassName) {
 
@@ -86,7 +86,7 @@ public enum StreamingExchangeFactory {
 
 
 
-  public StreamingExchange createExchange(String exchangeClassName,TradingArea area) {
+  public StreamingExchange createExchange(String exchangeClassName, TradingArea area) {
 
     StreamingExchange exchange = getExchange(exchangeClassName);
 

@@ -9,7 +9,7 @@ import org.knowm.xchange.dto.marketdata.OrderBook;
 import org.knowm.xchange.dto.marketdata.Ticker;
 import org.knowm.xchange.dto.marketdata.Trade;
 import org.knowm.xchange.dto.trade.LimitOrder;
-import org.mh.stream.exchange.core.ParsingCurrencyPair;
+import org.market.hedge.core.ParsingCurrencyPair;
 import org.mh.stream.exchange.core.StreamingMarketDataService;
 import org.mh.stream.exchange.exception.NumberOfSubscriptionsException;
 import org.slf4j.Logger;

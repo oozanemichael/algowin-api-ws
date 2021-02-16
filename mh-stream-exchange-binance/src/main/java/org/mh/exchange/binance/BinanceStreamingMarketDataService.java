@@ -25,7 +25,7 @@ import org.knowm.xchange.dto.marketdata.Ticker;
 import org.knowm.xchange.dto.marketdata.Trade;
 import org.knowm.xchange.exceptions.ExchangeException;
 import org.mh.service.netty.StreamingObjectMapperHelper;
-import org.mh.stream.exchange.core.ParsingCurrencyPair;
+import org.market.hedge.core.ParsingCurrencyPair;
 import org.mh.stream.exchange.core.ProductSubscription;
 import org.mh.stream.exchange.core.StreamingMarketDataService;
 import static org.mh.service.netty.StreamingObjectMapperHelper.getObjectMapper;

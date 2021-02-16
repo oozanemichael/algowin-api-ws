@@ -3,6 +3,9 @@ package org.mh.stream.exchange.core;
 
 import org.knowm.xchange.currency.CurrencyPair;
 import org.knowm.xchange.exceptions.NotYetImplementedForExchangeException;
+import org.market.hedge.core.ParsingCurrencyPair;
+import org.market.hedge.core.TradingArea;
+import org.market.hedge.service.StreamingParsingCurrencyPair;
 
 public class StreamingParsing implements StreamingParsingCurrencyPair{
 

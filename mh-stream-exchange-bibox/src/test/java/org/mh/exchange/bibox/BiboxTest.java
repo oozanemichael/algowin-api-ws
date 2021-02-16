@@ -5,6 +5,8 @@ import io.reactivex.disposables.Disposable;
 
 import org.knowm.xchange.currency.CurrencyPair;
 import org.knowm.xchange.dto.marketdata.OrderBook;
+import org.market.hedge.core.TradingArea;
+import org.market.hedge.service.StreamingParsingCurrencyPair;
 import org.mh.stream.exchange.core.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,10 +21,11 @@ public class BiboxTest {
         StreamingParsingCurrencyPair parsing= exchange.getStreamingParsingCurrencyPair();
         Observable<OrderBook> observable=exchange.getStreamingMarketDataService().getOrderBook(parsing.parsing(CurrencyPair.BTC_USDT));
         Disposable disposable=observable.subscribe(o -> {
-            log.warn("{}",o.getAsks());
+            log.warn("{}",o);
+            //log.warn("{}",o.getAsks());
         });
 
-        disposable.dispose();
+        //disposable.dispose();
     }
 
 }

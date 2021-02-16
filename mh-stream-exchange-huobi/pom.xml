@@ -12,6 +12,7 @@
     <artifactId>mh-stream-exchange-huobi</artifactId>
 
     <dependencies>
+
         <dependency>
             <groupId>org.market.hedge</groupId>
             <artifactId>mh-stream-exchange-core</artifactId>

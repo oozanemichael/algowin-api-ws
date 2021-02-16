@@ -6,6 +6,7 @@ import org.knowm.xchange.dto.trade.UserTrade;
 import org.knowm.xchange.exceptions.ExchangeSecurityException;
 import org.knowm.xchange.exceptions.NotYetImplementedForExchangeException;
 import org.knowm.xchange.service.trade.params.TradeHistoryParams;
+import org.market.hedge.core.ParsingCurrencyPair;
 
 public interface StreamingTradeService {
 

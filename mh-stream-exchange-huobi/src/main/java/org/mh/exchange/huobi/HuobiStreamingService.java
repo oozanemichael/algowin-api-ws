@@ -43,7 +43,7 @@ public class HuobiStreamingService extends JsonNettyStreamingService {
         JsonNode ping=jsonNode.findValue("ping");
         if (Objects.nonNull(ping)){
             JSONObject rsp = new JSONObject();
-            rsp.put("pong", ping.asText());
+            rsp.put("pong", ping.asLong());
             this.sendMessage(rsp.toJSONString());
         }
         super.messageHandler(message);

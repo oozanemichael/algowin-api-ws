@@ -4,6 +4,8 @@ import io.reactivex.Observable;
 import org.knowm.xchange.dto.marketdata.OrderBook;
 import org.knowm.xchange.dto.marketdata.Ticker;
 import org.knowm.xchange.dto.marketdata.Trade;
+import org.market.hedge.core.ParsingCurrencyPair;
+
 public interface StreamingMarketDataService {
   /**
    * Get an order book representing the current offered exchange rates (market depth).

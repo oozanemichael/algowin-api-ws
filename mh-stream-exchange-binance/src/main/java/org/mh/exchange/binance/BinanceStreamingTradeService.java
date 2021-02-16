@@ -15,7 +15,7 @@ import org.knowm.xchange.dto.trade.UserTrade;
 import org.knowm.xchange.exceptions.ExchangeException;
 import org.knowm.xchange.exceptions.ExchangeSecurityException;
 import org.mh.service.netty.StreamingObjectMapperHelper;
-import org.mh.stream.exchange.core.ParsingCurrencyPair;
+import org.market.hedge.core.ParsingCurrencyPair;
 import org.mh.stream.exchange.core.StreamingTradeService;
 
 import java.io.IOException;

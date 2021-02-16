@@ -4,6 +4,8 @@ import io.reactivex.Observable;
 import io.reactivex.disposables.Disposable;
 import org.knowm.xchange.currency.CurrencyPair;
 import org.knowm.xchange.dto.marketdata.OrderBook;
+import org.market.hedge.core.TradingArea;
+import org.market.hedge.service.StreamingParsingCurrencyPair;
 import org.mh.stream.exchange.core.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

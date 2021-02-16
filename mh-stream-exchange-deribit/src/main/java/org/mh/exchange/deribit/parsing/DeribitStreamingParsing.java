@@ -1,9 +1,9 @@
 package org.mh.exchange.deribit.parsing;
 
 import org.knowm.xchange.currency.CurrencyPair;
-import org.mh.stream.exchange.core.ParsingCurrencyPair;
+import org.market.hedge.core.ParsingCurrencyPair;
 import org.mh.stream.exchange.core.StreamingParsing;
-import org.mh.stream.exchange.core.TradingArea;
+import org.market.hedge.core.TradingArea;
 
 import java.util.Date;
 
@@ -13,6 +13,17 @@ public class DeribitStreamingParsing extends StreamingParsing {
         super(tradingArea);
     }
 
+    @Override
+    public ParsingCurrencyPair instancePerpetualSwap(CurrencyPair currencyPair, Object... args) {
+        if (args.length==0){
+            if (currencyPair.counter.toString().equals("USD")) {
+                return new ParsingCurrencyPair(currencyPair.base + "-PERPETUAL",currencyPair);
+            }
+        }else {
+            return new ParsingCurrencyPair((currencyPair.base+"-"+DateFormatUtil.format((Date) args[0])),currencyPair);
+        }
+        throw new IllegalArgumentException("There is no corresponding currency pair on the exchange");
+    }
 
     /**
      * @param args args[0] 期权到期日  true  date

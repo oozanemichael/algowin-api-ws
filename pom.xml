@@ -27,8 +27,11 @@
     </developers>
 
     <properties>
-        <knowm.xchange.version>4.4.2</knowm.xchange.version>
-        <xchange.version>4.4.2-SNAPSHOT</xchange.version>
+        <market.hedge.http.version>1.0</market.hedge.http.version>
+        <knowm.xchange.version>5.0.1</knowm.xchange.version>
+        <xchange.version>5.0.1</xchange.version>
+        <!--<knowm.xchange.version>4.4.2</knowm.xchange.version>
+        <xchange.version>4.4.2-SNAPSHOT</xchange.version>-->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
@@ -38,6 +41,12 @@
     <dependencies>
 
         <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.30</version>
+        </dependency>
+
+        <dependency>
             <groupId>io.reactivex.rxjava2</groupId>
             <artifactId>rxjava</artifactId>
             <version>2.2.18</version>
@@ -45,20 +54,15 @@
 
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-core</artifactId>
-            <version>2.11.1</version>
+            <artifactId>log4j-slf4j-impl</artifactId>
+            <version>2.13.1</version>
+            <scope>test</scope>
         </dependency>
-
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-api</artifactId>
-            <version>2.11.1</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-simple</artifactId>
-            <version>1.6.6</version>
+            <artifactId>log4j-core</artifactId>
+            <version>2.13.1</version>
+            <scope>test</scope>
         </dependency>
 
         <dependency>

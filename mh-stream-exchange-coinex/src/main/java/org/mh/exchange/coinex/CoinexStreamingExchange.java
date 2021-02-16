@@ -2,6 +2,8 @@ package org.mh.exchange.coinex;
 
 import io.reactivex.Completable;
 import org.knowm.xchange.coinex.CoinexExchange;
+import org.market.hedge.core.TradingArea;
+import org.market.hedge.service.StreamingParsingCurrencyPair;
 import org.mh.exchange.coinex.parsing.CoinexStreamingParsing;
 import org.mh.stream.exchange.core.*;
 

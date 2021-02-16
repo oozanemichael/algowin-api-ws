@@ -5,6 +5,7 @@ import org.knowm.xchange.Exchange;
 import org.knowm.xchange.ExchangeSpecification;
 import org.knowm.xchange.utils.Assert;
 import org.knowm.xchange.exceptions.ExchangeException;
+import org.market.hedge.core.TradingArea;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

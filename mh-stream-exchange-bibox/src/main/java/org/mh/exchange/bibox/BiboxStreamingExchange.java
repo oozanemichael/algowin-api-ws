@@ -2,7 +2,8 @@ package org.mh.exchange.bibox;
 
 import io.reactivex.Completable;
 import org.knowm.xchange.bibox.BiboxExchange;
-import org.mh.stream.exchange.core.TradingArea;
+import org.market.hedge.core.TradingArea;
+import org.market.hedge.service.StreamingParsingCurrencyPair;
 import org.mh.exchange.bibox.parsing.BiboxStreamingParsing;
 import org.mh.stream.exchange.core.*;
 
@@ -16,7 +17,6 @@ public class BiboxStreamingExchange extends BiboxExchange implements StreamingEx
     StreamingParsingCurrencyPair parsingCurrencyPair;
 
     BiboxStreamingMarketDataService marketDataService;
-
 
     public BiboxStreamingExchange(){
         streamingService=new BiboxStreamingService(API_URI);

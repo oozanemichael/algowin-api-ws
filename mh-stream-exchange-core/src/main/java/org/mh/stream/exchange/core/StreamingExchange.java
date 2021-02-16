@@ -2,6 +2,8 @@ package org.mh.stream.exchange.core;
 
 import org.knowm.xchange.Exchange;
 import org.knowm.xchange.exceptions.NotYetImplementedForExchangeException;
+import org.market.hedge.core.TradingArea;
+import org.market.hedge.service.StreamingParsingCurrencyPair;
 import org.mh.service.core.ConnectableService;
 import io.netty.channel.ChannelHandlerContext;
 import io.reactivex.Completable;

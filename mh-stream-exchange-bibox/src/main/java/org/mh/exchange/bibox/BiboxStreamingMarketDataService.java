@@ -11,7 +11,7 @@ import org.knowm.xchange.dto.marketdata.Ticker;
 import org.knowm.xchange.dto.marketdata.Trade;
 import org.knowm.xchange.dto.trade.LimitOrder;
 import org.mh.service.netty.util.GZIPUtils;
-import org.mh.stream.exchange.core.ParsingCurrencyPair;
+import org.market.hedge.core.ParsingCurrencyPair;
 import org.mh.stream.exchange.core.StreamingMarketDataService;
 
 import java.math.BigDecimal;

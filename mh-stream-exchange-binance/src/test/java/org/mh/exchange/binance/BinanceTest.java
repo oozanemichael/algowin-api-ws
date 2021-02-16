@@ -2,6 +2,8 @@ package org.mh.exchange.binance;
 
 import io.reactivex.disposables.Disposable;
 import org.knowm.xchange.currency.Currency;
+import org.market.hedge.core.ParsingCurrencyPair;
+import org.market.hedge.core.TradingArea;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.knowm.xchange.currency.CurrencyPair;

@@ -5,6 +5,8 @@ import io.reactivex.disposables.Disposable;
 
 import org.knowm.xchange.currency.CurrencyPair;
 import org.knowm.xchange.dto.marketdata.OrderBook;
+import org.market.hedge.core.TradingArea;
+import org.market.hedge.service.StreamingParsingCurrencyPair;
 import org.mh.service.netty.JsonNettyStreamingService;
 import org.mh.stream.exchange.core.*;
 import org.slf4j.Logger;
@@ -27,7 +29,7 @@ public class DeribitOptionTest {
         DateFormat dateFormat1 = new SimpleDateFormat("yyyy-MM-dd");
         Date date=null;
         try {
-            date = dateFormat1.parse("2020-12-25");
+            date = dateFormat1.parse("2021-02-12");
         } catch (ParseException e) {
             e.printStackTrace();
         }

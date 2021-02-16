@@ -2,9 +2,9 @@ package org.mh.exchange.coinex.parsing;
 
 
 import org.knowm.xchange.currency.CurrencyPair;
-import org.mh.stream.exchange.core.ParsingCurrencyPair;
+import org.market.hedge.core.ParsingCurrencyPair;
 import org.mh.stream.exchange.core.StreamingParsing;
-import org.mh.stream.exchange.core.TradingArea;
+import org.market.hedge.core.TradingArea;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

@@ -25,6 +25,12 @@
         </dependency>
 
         <dependency>
+            <groupId>org.market.hedge</groupId>
+            <artifactId>mh-core</artifactId>
+            <version>${market.hedge.http.version}</version>
+        </dependency>
+
+        <dependency>
             <groupId>org.knowm.xchange</groupId>
             <artifactId>xchange-core</artifactId>
             <version>${xchange.version}</version>

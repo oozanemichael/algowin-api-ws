@@ -4,6 +4,9 @@ package org.mh.exchange.huobi;
 import io.reactivex.Observable;
 
 import io.reactivex.disposables.Disposable;
+import org.junit.Test;
+import org.market.hedge.core.TradingArea;
+import org.market.hedge.service.StreamingParsingCurrencyPair;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.knowm.xchange.currency.CurrencyPair;
@@ -14,28 +17,21 @@ public class HuobiExchangeTest {
 
     private static final Logger log = LoggerFactory.getLogger(HuobiExchangeTest.class);
 
+    @Test
+    public void subOrderBook() {
 
-    public static void main(String[] args) {
-
-
+        log.debug("sss");
         StreamingExchange exchange =
-                StreamingExchangeFactory.INSTANCE.createExchange(HuobiStreamingExchange.class.getName(),TradingArea.Margin);
+                StreamingExchangeFactory.INSTANCE.createExchange(HuobiStreamingExchange.class.getName(), TradingArea.PerpetualSwap);
         exchange.connect().blockingAwait();
         StreamingParsingCurrencyPair parsing= exchange.getStreamingParsingCurrencyPair();
-        Observable<OrderBook> observable=exchange.getStreamingMarketDataService().getOrderBook(parsing.parsing(CurrencyPair.BTC_USDT));
+        Observable<OrderBook> observable=exchange.getStreamingMarketDataService().getOrderBook(parsing.parsing(CurrencyPair.BTC_USD));
         Disposable disposable=observable.subscribe(o -> {
-            log.info("Asks: {}", o.getAsks().get(0));
-            log.info("Bids: {}", o.getBids().get(0));
+            log.info("Asks: {},amount:{}", o.getAsks().get(0).getLimitPrice(),o.getAsks().get(0).getOriginalAmount());
+            log.info("Bids: {}amount:{}", o.getBids().get(0).getLimitPrice(),o.getBids().get(0).getOriginalAmount());
+            //Thread.sleep(2000);
             log.warn("_");
         });
-
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        disposable.dispose();
-
 
 /*
         Observable<OrderBook> observables=exchange.getStreamingMarketDataService().getOrderBook(parsing.parsing(CurrencyPair.ETH_USDT));
@@ -51,6 +47,21 @@ public class HuobiExchangeTest {
         //取消连接
         //exchange.disconnect().blockingAwait();
 
+    }
+
+
+    public static void main(String[] args) {
+        HuobiStreamingExchange exchange =
+                (HuobiStreamingExchange) StreamingExchangeFactory.INSTANCE.createExchange(HuobiStreamingExchange.class.getName(), TradingArea.PerpetualSwap);
+        exchange.connect().blockingAwait();
+        StreamingParsingCurrencyPair parsing= exchange.getStreamingParsingCurrencyPair();
+        Observable<OrderBook> observable=exchange.getStreamingMarketDataService().getOrderBook(parsing.parsing(CurrencyPair.BTC_USD));
+        Disposable disposable=observable.subscribe(o -> {
+            log.info("Asks: {},amount:{}", o.getAsks().get(0).getLimitPrice(),o.getAsks().get(0).getOriginalAmount());
+            log.info("Bids: {}amount:{}", o.getBids().get(0).getLimitPrice(),o.getBids().get(0).getOriginalAmount());
+            //Thread.sleep(2000);
+            log.warn("_");
+        });
     }
 
 }

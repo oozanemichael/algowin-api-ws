@@ -20,7 +20,7 @@ import java.util.List;
 
 public class DeribitStreamingExchange extends DeribitExchange implements StreamingExchange {
 
-    private static final String API_URI = "wss://www.deribit.com/ws/api/v2";
+    private static final String API_URI = "wss://www.deribit.com";
 
     private static final String TESTNET_API_URI = "wss://test.deribit.com/ws/api/v2";
 

@@ -4,6 +4,7 @@ import com.google.common.base.MoreObjects;
 import org.knowm.xchange.binance.BinanceAuthenticated;
 import org.knowm.xchange.binance.BinanceExchange;
 import org.knowm.xchange.binance.service.BinanceMarketDataService;
+import org.knowm.xchange.client.ExchangeRestProxyBuilder;
 import org.market.hedge.core.TradingArea;
 import org.knowm.xchange.service.BaseExchangeService;
 import org.slf4j.Logger;
@@ -115,11 +116,16 @@ public class BinanceStreamingExchange extends BinanceExchange implements Streami
       }
 
       log.info("Connecting to authenticated web socket");
-      BinanceAuthenticated binance =
+      //todo 2023-01-08 老代码xchange-core 5.0.1
+      /*BinanceAuthenticated binance =
           RestProxyFactory.createProxy(
               BinanceAuthenticated.class,
               getExchangeSpecification().getSslUri(),
-              new BaseExchangeService<BinanceExchange>(this) {}.getClientConfig());
+              new BaseExchangeService<BinanceExchange>(this) {}.getClientConfig());*/
+        BinanceAuthenticated binance =
+                ExchangeRestProxyBuilder.forInterface(
+                        BinanceAuthenticated.class, getExchangeSpecification())
+                .build();
       userDataChannel =
           new org.mh.exchange.binance.BinanceUserDataChannel(binance, exchangeSpecification.getApiKey(), onApiCall);
       try {

@@ -3,6 +3,7 @@ package org.mh.exchange.deribit;
 import io.reactivex.Observable;
 import io.reactivex.disposables.Disposable;
 
+import org.junit.Test;
 import org.knowm.xchange.currency.CurrencyPair;
 import org.knowm.xchange.dto.marketdata.OrderBook;
 import org.market.hedge.core.TradingArea;
@@ -35,6 +36,19 @@ public class DeribitFutereDateTest {
         Observable<OrderBook> observable=exchange.getStreamingMarketDataService().getOrderBook(parsing.parsing(CurrencyPair.BTC_USD,date),1);
         Disposable disposable=observable.subscribe(o->{log.info("{}",o);});
 
+    }
+
+    @Test
+    public void futures() {
+        StreamingExchange exchange =
+                StreamingExchangeFactory.INSTANCE.createExchange(DeribitStreamingExchange.class.getName(), TradingArea.Futures);
+        exchange.connect().blockingAwait();
+        StreamingParsingCurrencyPair parsing=exchange.getStreamingParsingCurrencyPair();
+        Observable<OrderBook> observable=exchange.getStreamingMarketDataService().getOrderBook(parsing.parsing(CurrencyPair.BTC_USD),10);
+        Disposable disposable=observable.subscribe(o -> {
+            log.info("Asks: {},amount:{}", o.getAsks().get(0).getLimitPrice(),o.getAsks().get(0).getOriginalAmount());
+            log.info("Bids: {}amount:{}", o.getBids().get(0).getLimitPrice(),o.getBids().get(0).getOriginalAmount());
+         });
     }
 
 }

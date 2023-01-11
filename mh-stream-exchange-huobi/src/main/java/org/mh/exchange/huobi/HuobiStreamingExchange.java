@@ -4,15 +4,9 @@ import io.netty.channel.ChannelHandlerContext;
 import io.reactivex.Completable;
 
 import io.reactivex.Observable;
-import org.knowm.xchange.ExchangeSpecification;
 import org.market.hedge.core.TradingArea;
-import org.knowm.xchange.currency.CurrencyPair;
-import org.knowm.xchange.dto.meta.ExchangeMetaData;
 import org.knowm.xchange.exceptions.ExchangeException;
 import org.knowm.xchange.huobi.HuobiExchange;
-import org.knowm.xchange.service.account.AccountService;
-import org.knowm.xchange.service.marketdata.MarketDataService;
-import org.knowm.xchange.service.trade.TradeService;
 import org.market.hedge.exception.NullTradingAreaException;
 import org.market.hedge.service.StreamingParsingCurrencyPair;
 import org.mh.exchange.huobi.currencyPair.HuobiStreamingParsing;
@@ -20,7 +14,6 @@ import org.mh.stream.exchange.core.*;
 import si.mazi.rescu.SynchronizedValueFactory;
 
 import java.io.IOException;
-import java.util.List;
 
 public class HuobiStreamingExchange extends HuobiExchange implements StreamingExchange {
 
@@ -48,7 +41,7 @@ public class HuobiStreamingExchange extends HuobiExchange implements StreamingEx
                 this.streamingMarketDataService = new HuobiStreamingMarketDataService(streamingService, this);
                 break;
             case PerpetualSwap:
-                this.streamingService=new HuobiStreamingService(Swap_API_URI);
+                this.streamingService=new HuobiStreamingService("wss://api.btcgateway.pro/swap-ws");
                 this.streamingMarketDataService = new HuobiStreamingMarketDataService(streamingService, this);
                 break;
             default:

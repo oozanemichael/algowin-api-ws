@@ -28,8 +28,8 @@
 
     <properties>
         <market.hedge.http.version>1.0</market.hedge.http.version>
-        <knowm.xchange.version>5.0.1</knowm.xchange.version>
-        <xchange.version>5.0.1</xchange.version>
+        <knowm.xchange.version>5.0.13</knowm.xchange.version>
+        <xchange.version>5.0.13</xchange.version>
         <!--<knowm.xchange.version>4.4.2</knowm.xchange.version>
         <xchange.version>4.4.2-SNAPSHOT</xchange.version>-->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -74,19 +74,19 @@
 
     </dependencies>
 
-    <distributionManagement>
-        <repository>
-            <id>releases</id>
-            <name>releases Repository</name>
-            <url>http://45.32.54.240:8081/repository/maven-releases/</url>
-        </repository>
+<!--    <distributionManagement>-->
+<!--        <repository>-->
+<!--            <id>releases</id>-->
+<!--            <name>releases Repository</name>-->
+<!--            <url>http://45.32.54.240:8081/repository/maven-releases/</url>-->
+<!--        </repository>-->
 
-        <snapshotRepository>
-            <id>snapshots</id>
-            <url>http://45.32.54.240:8081/repository/maven-snapshots/</url>
-            <name>snapshots Repository</name>
-        </snapshotRepository>
-    </distributionManagement>
+<!--        <snapshotRepository>-->
+<!--            <id>snapshots</id>-->
+<!--            <url>http://45.32.54.240:8081/repository/maven-snapshots/</url>-->
+<!--            <name>snapshots Repository</name>-->
+<!--        </snapshotRepository>-->
+<!--    </distributionManagement>-->
 
     <dependencyManagement>
         <dependencies>

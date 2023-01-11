@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.knowm.xchange.currency.CurrencyPair;
 import org.knowm.xchange.dto.marketdata.OrderBook;
 import org.mh.stream.exchange.core.*;
+import si.mazi.rescu.ClientConfig;
 
 public class HuobiExchangeTest {
 
@@ -19,7 +20,6 @@ public class HuobiExchangeTest {
 
     @Test
     public void subOrderBook() {
-
         log.debug("sss");
         StreamingExchange exchange =
                 StreamingExchangeFactory.INSTANCE.createExchange(HuobiStreamingExchange.class.getName(), TradingArea.PerpetualSwap);
